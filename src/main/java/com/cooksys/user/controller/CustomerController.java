@@ -40,6 +40,13 @@ public class CustomerController {
 		return cService.getCustomer(id);
 		
 	}
+	
+
+	@GetMapping("{id}/address")
+	public AddressDto getAddressByCustomerId(@PathVariable Integer id) {
+		return cService.getAddressByCustomerId(id);
+	}
+	
 	@PostMapping
 	public void createCustomer(@RequestBody CustomerDto dto) {
 		cService.save(cMapper.fromDto(dto));

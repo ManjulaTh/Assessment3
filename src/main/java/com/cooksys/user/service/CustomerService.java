@@ -8,6 +8,7 @@ import com.cooksys.user.dto.AddressDto;
 import com.cooksys.user.dto.CustomerDto;
 import com.cooksys.user.entity.Customer;
 import com.cooksys.user.mapper.CustomerMapper;
+import com.cooksys.user.repository.AddressRepository;
 import com.cooksys.user.repository.CustomerRepository;
 
 @Service
@@ -15,7 +16,14 @@ public class CustomerService {
 	
 	private CustomerMapper cMapper;
 	private CustomerRepository cRepo;
+	private AddressRepository aRepo;
 	
+	public CustomerService(CustomerMapper cMapper, CustomerRepository cRepo, AddressRepository aRepo) {
+		this.cMapper = cMapper;
+		this.cRepo = cRepo;
+		this.aRepo = aRepo;
+	}
+
 	public CustomerService(CustomerMapper cMapper, CustomerRepository cRepo) {
 		this.cMapper = cMapper;
 		this.cRepo = cRepo;
@@ -43,5 +51,9 @@ public class CustomerService {
 
 	public void delete(Integer id) {
 		cRepo.deleteById(id);
+	}
+
+	public AddressDto getAddressByCustomerId(Integer id) {
+		return cRepo.findByCustomerId(id);
 	}
 }
